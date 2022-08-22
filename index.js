@@ -1,7 +1,12 @@
 import express from 'express'
 import db from './database/db.js'
+import routesAuth from './routes/auth.js'
 
 const app = express()
+
+
+app.use(express.json())
+app.use('/', routesAuth)
 
 try {
     db.authenticate()
