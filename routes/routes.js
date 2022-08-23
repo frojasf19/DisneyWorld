@@ -1,5 +1,5 @@
 import express from 'express'
-import { crearPersonaje, editarPersonaje, eliminarPersonaje, todosLosPersonajes } from '../controller/PersonajeController'
+import { crearPersonaje, editarPersonaje, eliminarPersonaje, todosLosPersonajes } from '../controller/PersonajeController.js'
 
 const routes = express()
 

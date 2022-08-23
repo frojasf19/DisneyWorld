@@ -33,7 +33,6 @@ export const todosLosPersonajes = async (req, res) => {
 export const crearPersonaje = async (req, res) => {
     try {
         const { imagen, nombre, edad, peso, historia, peliculasOSeries } = req.body
-        if(imagen && nombre && edad && peso && historia && peliculasOSeries){
             const nP = await personajes.create({
                 imagen,
                 nombre,
@@ -42,10 +41,9 @@ export const crearPersonaje = async (req, res) => {
                 historia,
                 peliculasOSeries
             })
-            res.json({nP})
-        }
+            res.json(nP)
     } catch (error) {
-        res.json('No se puedo crear el personaje')
+        res.json({message: error.message})
     }
 }
 
