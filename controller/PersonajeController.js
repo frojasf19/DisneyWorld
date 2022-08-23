@@ -49,13 +49,10 @@ export const crearPersonaje = async (req, res) => {
 
 export const editarPersonaje = async (req, res) => {
     try {
-        const id = req.params
+        const {id} = req.params
         const { imagen, nombre, edad, peso, historia, peliculasOSeries } = req.body
-        const personaje = await personajes.findAll({
-            where: {
-                id
-            }
-        })
+        const personaje = await personajes.findByPk(id)
+        if(!personaje) res.json('Personaje no encontrado')
         const update = {
             "imagen": imagen || personaje.imagen,
             "nombre": nombre || personaje.nombre,
@@ -66,18 +63,18 @@ export const editarPersonaje = async (req, res) => {
         }
         await personajes.update(update, {
             where: {
-                id
+                id: id
             }
         })
         res.json('Personaje actualizado con exito')
     } catch (error) {
-        res.json('No se pudo actualizar')
+        res.json({message: error.message})
     }
 }
 
 export const eliminarPersonaje = async (req, res) => {
     try {
-        const id = req.params
+        const {id} = req.params
         await personajes.destroy({
             where: {
                id
