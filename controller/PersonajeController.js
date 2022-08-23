@@ -56,3 +56,17 @@ export const editarPersonaje = async (req, res) => {
         res.json('No se pudo actualizar')
     }
 }
+
+export const eliminarPersonaje = async (req, res) => {
+    try {
+        const id = req.params
+        await personajes.destroy({
+            where: {
+               id
+            }
+        })
+        res.json('Personaje eliminado con exito')
+    } catch (error) {
+        res.json('No se pudo eliminar al personaje')
+    }
+}
