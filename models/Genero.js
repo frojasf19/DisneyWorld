@@ -1,7 +1,7 @@
 import db from "../database/db.js";
 import { DataTypes } from "sequelize";
 
-export const personajes = db.define('generos', {
+export const generos = db.define('generos', {
     imagen: {
         type: DataTypes.STRING
     },
@@ -12,3 +12,5 @@ export const personajes = db.define('generos', {
         type: DataTypes.STRING
     }
 })
+
+export default generos

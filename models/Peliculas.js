@@ -1,7 +1,7 @@
 import db from "../database/db.js";
 import { DataTypes } from "sequelize";
 
-export const personajes = db.define('peliculas o series', {
+export const peliculas = db.define('peliculas o series', {
     imagen: {
         type: DataTypes.STRING
     },
@@ -18,3 +18,5 @@ export const personajes = db.define('peliculas o series', {
         type: DataTypes.STRING
     }
 })
+
+export default peliculas
