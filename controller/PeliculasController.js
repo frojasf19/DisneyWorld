@@ -1,15 +1,30 @@
+import { or } from "sequelize/types";
 import peliculas from "../models/Peliculas.js";
 
 export const todasLasPeliculas = async (req, res) => {
     try {
-        const listPersonajes = await peliculas.findAll({
-            where: {
-                imagen,
-                titulo,
-                fechaDeCreacion
-            }
-        })
-        res.json(listPersonajes)
+        const { name, order } = req.query
+        if(!name && !order){
+            const listPersonajes = await peliculas.findAll({
+                where: {
+                    imagen,
+                    titulo,
+                    fechaDeCreacion
+                }
+            })
+            res.json(listPersonajes)
+        }else if(name){
+            const filtName = await peliculas.findAll({where: {nombre: name}})
+            res.json(filtName)
+        }else if(order == asc){
+            const todas = peliculas.findAll()
+            if(!todas) res.json('No hay peliculas')
+            todas.sort((a, b) => new Date(a.fechaDeCreacion) - new Date(b.fechaDeCreacion))
+        }else if(order == des){
+            const todas = peliculas.findAll()
+            if(!todas) res.json('No hay peliculas')
+            todas.sort((a, b) => new Date(b.fechaDeCreacion) - new Date(a.fechaDeCreacion))
+        }
     } catch (error) {
         res.json({message: error.message})
     }
